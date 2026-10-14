@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marginal Note · Why a Confident Model Isn't a Sure One</title>
+  <meta name="description" content="The most dangerous thing a language model outputs is not a wrong answer. It is a wrong answer delivered with complete certainty.">
+  <link rel="canonical" href="https://marginalnote.com/essays/confident-model-not-sure.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Why a Confident Model Isn't a Sure One">
+  <meta property="og:description" content="The most dangerous thing a language model outputs is not a wrong answer. It is a wrong answer delivered with complete certainty.">
+  <meta property="og:url" content="https://marginalnote.com/essays/confident-model-not-sure.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/rss+xml" title="Marginal Note" href="../feed.xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/theme.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="progress" aria-hidden="true"></div>
+
+  <header class="site-head">
+    <div class="wrap nav">
+      <a class="brand" href="../index.html">Marginal<em>Note</em></a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="../index.html">Essays</a>
+        <a href="../about.html">About</a>
+        <a href="../feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <article class="article wrap">
+      <header class="article-head measure">
+        <div class="article-kicker">
+          <span class="count">Nº 01</span>
+          <span>AI</span>
+        </div>
+        <h1>Why a Confident Model Isn't a Sure One</h1>
+        <p class="dek">The most dangerous thing a language model outputs is not a wrong answer. It is a wrong answer delivered with complete certainty.</p>
+        <div class="byline">
+          <span>Marginal Note</span>
+          <span>14 Oct 2026</span>
+          <span>4 min</span>
+          <span>980 words</span>
+        </div>
+      </header>
+      <div class="article-body measure">
+        <p class="dropcap"><strong>The most dangerous thing a large language model outputs is not a wrong answer. It is a wrong answer delivered with complete certainty.</strong></p>
+
+<p>Ask a model a question and it will often begin its reply with "I'm" — as in "I understand," "I think," "I believe." It will never begin with "I have no idea." Not because it is concealing ignorance, but because it does not have any. A language model is a probability distribution over tokens, not a mind with a degree of belief about the state of the world. Confidence, for a model, is a property of the text it has learned to produce — not a calibrated report on how likely the answer is to be true.</p>
+
+<p>The confusion matters because we have built interfaces that disguise it. A search engine that says "no results" is honest about what it does not know. A chatbot that says "here's what I found" sounds like it found something, and the words carry the same weight whether the answer is from a verified source or assembled from statistics over many sources of unknown quality.</p>
+
+<h2>Two kinds of confidence</h2>
+
+<p>What we care about, when we ask an expert a question, is not merely the words they say. It is whether those words rest on something — a measurement, a document, a method, a body of experience. An oncologist who tells you a diagnosis carries a certain epistemic weight, not because doctors never err, but because the statement is tethered to evidence you could in principle inspect.</p>
+
+<p>A language model produces statements with no such tether. The underlying mechanism selects the next word from a probability distribution. None of those probabilities encode whether the statement is true. The model can be maximally confident about something no document on Earth supports, because "confident" is just a pattern of expression it has learned.</p>
+
+<p>This is not an argument that models are useless. They are genuinely useful for summarization, translation, brainstorming, and any task where producing plausible text is the goal. The danger arrives when plausible text is mistaken for reliable knowledge — which is to say, when the confidence of the delivery is treated as evidence of accuracy.</p>
+
+<h2>Why the delivery matters</h2>
+
+<p>Imagine two people give you directions. The first is hesitant, checking their phone, admitting they are not sure whether it is the second or third left. The second is brisk and certain: "Take the second left, you can't miss it." You will probably follow the second person. Neither of them knows, but only one of them sounds like they do.</p>
+
+<p>Language models are the second person, in every conversation, about everything. Their default output register is the confident one, because a vast share of human text — instruction manuals, product pages, news reports, forum posts — is written in the register of certainty. The training distribution rewards confident prose. The model has learned that to be fluent is to be sure.</p>
+
+<blockquote><p>"To be fluent is to be sure." — a lesson the model learned from us</p></blockquote>
+
+<p>The result is a tool that is indistinguishable, in tone, from a reliable source, with no mechanism for flagging when it is improvising.</p>
+
+<h2>What would actual confidence look like</h2>
+
+<p>A system with calibrated uncertainty would say: "I don't know," and mean it. It would hedge in proportion to the quality of its sources. It would refuse, out loud, when the question requires judgment it does not have. Some of this is being bolted onto products after the fact — the "this may not be right, verify with a primary source" disclaimers that appear, inconsistently, at the bottom of generated answers.</p>
+
+<p>But a disclaimer at the bottom is not the same as calibrated expression. The damage is done in the main text, in the confident prose that reads like a person who knows. Disclaimers train us to distrust the tool uniformly; calibration would let us trust it precisely, in the cases where it deserves trust.</p>
+
+<p class="note">None of this requires the model to be conscious, or to be lying, or to have intentions. It is a mechanical account of how text generators work. The problem is not that the machine intends to deceive. The problem is that the machine does not know, and cannot signal what it does not know, because uncertainty is not something its architecture produces.</p>
+
+<h2>The practical rule</h2>
+
+<p>If you take one thing from this note: treat the confidence of a model as a feature of its prose, not a signal about its accuracy. Ask where the answer came from. Check the primary source. If a claim matters — a diagnosis, a contract clause, a legal citation, a number you will act on — verify it against something that can be wrong in the ways a language model cannot.</p>
+
+<p>The model will not be insulted by being checked. It will not remember. It will not even notice. That is precisely the problem, and also the solution: we are still the ones who have to.</p>
+      </div>
+      <div class="article measure">
+        <p class="endsig">End of note</p>
+      </div>
+    </article>
+
+    <nav class="readnext wrap" aria-label="Next essay">
+      <p class="label">Continue reading</p>
+      <a class="next-row" data-next href="#">
+        <h3>Next essay</h3>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="next-row" data-prev href="../index.html" style="font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:inline-block;margin-top:1rem;">
+        ← All essays
+      </a>
+    </nav>
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap foot-grid">
+      <div>
+        <div class="foot-brand">Marginal<em>Note</em></div>
+        <p class="foot-line">Notes in the margins of the machine age.<br>Anonymous, independent, unhurried.</p>
+      </div>
+      <div class="foot-links">
+        <a href="../index.html">Essays</a>
+        <a href="../about.html">About</a>
+        <a href="../feed.xml">RSS</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/site.js"></script>
+</body>
+</html>

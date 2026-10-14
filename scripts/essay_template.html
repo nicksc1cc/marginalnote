@@ -13,76 +13,82 @@
   <meta name="twitter:card" content="summary">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="alternate" type="application/rss+xml" title="Marginal Note" href="../feed.xml">
+  <link rel="sitemap" type="application/xml" href="../sitemap.xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/theme.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="progress" aria-hidden="true"></div>
+  <div id="ink-canvas" aria-hidden="true"></div>
 
   <header class="site-head">
-    <div class="wrap nav">
-      <a class="brand" href="../index.html">Marginal<em>Note</em></a>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="../index.html">Essays</a>
-        <a href="../about.html">About</a>
-        <a href="../feed.xml">RSS</a>
-      </nav>
+    <div class="sheet">
+      <div class="nav">
+        <a class="brand" href="../index.html">Marginal<em>Note</em></a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="../index.html">Essays</a>
+          <a href="../about.html">About</a>
+          <a href="../feed.xml">RSS</a>
+        </nav>
+      </div>
     </div>
   </header>
 
   <main id="main">
-    <article class="article wrap">
-      <header class="article-head measure">
-        <div class="article-kicker">
-          <span class="count">Nº <!-- NO --></span>
-          <span><!-- CATEGORY --></span>
+    <div class="sheet">
+      <article class="article">
+        <header class="article-head">
+          <p class="article-kicker">
+            <span class="count">Nº <!-- NO --></span>
+            <span><!-- CATEGORY --></span>
+          </p>
+          <h1><!-- SHADOW_TITLE --></h1>
+          <p class="dek"><!-- DEK --></p>
+          <div class="byline">
+            <span>Marginal Note</span>
+            <span><!-- DATE --></span>
+            <span><!-- READTIME --></span>
+            <span><!-- WORDCOUNT --></span>
+          </div>
+        </header>
+        <div class="article-body">
+          <!-- BODY -->
         </div>
-        <h1><!-- SHADOW_TITLE --></h1>
-        <p class="dek"><!-- DEK --></p>
-        <div class="byline">
-          <span>Marginal Note</span>
-          <span><!-- DATE --></span>
-          <span><!-- READTIME --></span>
-          <span><!-- WORDCOUNT --></span>
-        </div>
-      </header>
-      <div class="article-body measure">
-        <!-- BODY -->
-      </div>
-      <div class="article measure">
-        <p class="endsig">End of note</p>
-      </div>
-    </article>
+        <p class="endsig" style="max-width:var(--measure);">End of note</p>
+      </article>
 
-    <nav class="readnext wrap" aria-label="Next essay">
-      <p class="label">Continue reading</p>
-      <a class="next-row" data-next href="<!-- NEXT_HREF -->">
-        <h3><!-- NEXT_TITLE --></h3>
-        <span class="arrow" aria-hidden="true">→</span>
-      </a>
-      <a class="next-row" data-prev href="../index.html" style="font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:inline-block;margin-top:1rem;">
-        ← All essays
-      </a>
-    </nav>
+      <nav class="readnext" aria-label="Next essay">
+        <p class="label">Continue reading</p>
+        <a class="next-row" data-next href="<!-- NEXT_HREF -->" style="max-width:var(--measure);">
+          <h3><!-- NEXT_TITLE --></h3>
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <p><a href="../index.html" style="font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:inline-block;margin-top:1rem;">← All essays</a></p>
+      </nav>
+    </div>
   </main>
 
   <footer class="site-foot">
-    <div class="wrap foot-grid">
-      <div>
-        <div class="foot-brand">Marginal<em>Note</em></div>
-        <p class="foot-line">Notes in the margins of the machine age.<br>Anonymous, independent, unhurried.</p>
-      </div>
-      <div class="foot-links">
-        <a href="../index.html">Essays</a>
-        <a href="../about.html">About</a>
-        <a href="../feed.xml">RSS</a>
+    <div class="sheet">
+      <div class="foot-grid">
+        <div>
+          <div class="foot-brand">Marginal<em>Note</em></div>
+          <p class="foot-line">Notes in the margins of the machine age.<br>Anonymous, independent, unhurried.</p>
+        </div>
+        <div class="foot-links">
+          <a href="../index.html">Essays</a>
+          <a href="../about.html">About</a>
+          <a href="../feed.xml">RSS</a>
+        </div>
       </div>
     </div>
   </footer>
 
   <script src="../assets/js/site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="../assets/js/ink.js"></script>
 </body>
 </html>

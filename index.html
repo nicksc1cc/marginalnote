@@ -16,37 +16,41 @@
   <link rel="sitemap" type="application/xml" href="sitemap.xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/theme.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="progress" aria-hidden="true"></div>
+  <div id="ink-canvas" aria-hidden="true"></div>
 
   <header class="site-head">
-    <div class="wrap nav">
-      <a class="brand" href="index.html">Marginal<em>Note</em></a>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="index.html" aria-current="page">Essays</a>
-        <a href="about.html">About</a>
-        <a href="feed.xml">RSS</a>
-      </nav>
+    <div class="sheet">
+      <div class="nav">
+        <a class="brand" href="index.html">Marginal<em>Note</em></a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html" aria-current="page">Essays</a>
+          <a href="about.html">About</a>
+          <a href="feed.xml">RSS</a>
+        </nav>
+      </div>
     </div>
   </header>
 
   <main id="main">
-    <section class="masthead wrap">
-      <p class="sigil">A journal of the machine age</p>
-      <h1>Notes in the margins <br>of the <span class="shadow">machine age</span>.</h1>
-      <p class="lede">Marginal Note is an anonymous journal of essays on <strong>artificial intelligence</strong>, <strong>ethics</strong>, and the <strong>world as it becomes</strong>. No bylines. No brand. Nobody to appease. Just thinking, written in the margins of the loudest century so far.</p>
-    </section>
+    <div class="sheet">
+      <section class="masthead">
+        <p class="folio" style="margin-left: calc(-1 * var(--margin-col));">A journal of the machine age</p>
+        <h1>Notes in the margins<br>of the <span class="soft">machine age</span>.</h1>
+        <p class="lede">Marginal Note is an anonymous journal of essays on <strong>artificial intelligence</strong>, <strong>ethics</strong>, and the <strong>world as it becomes</strong>. No bylines. No brand. Nobody to appease. Just thinking, written in the margins of the loudest century so far.</p>
+      </section>
 
-    <section class="wrap">
-      <div class="index">
-        <div class="index-head">
-          <span class="num">Essays</span>
-          <span class="count"><span id="essayCount"></span> · Updated monthly</span>
-        </div>
+      <div class="index-head">
+        <span class="num">Essays</span>
+        <span class="count"><span id="essayCount"></span> · Updated as the mood takes us</span>
+      </div>
+
+      <div class="essay-list">
         <!-- ESSAYS -->
         <a class="essay-row reveal" href="essays/confident-model-not-sure.html">
           <div class="no"><span>Nº 01</span></div>
@@ -88,24 +92,28 @@
         </a>
         <!-- /ESSAYS -->
       </div>
-    </section>
+    </div>
   </main>
 
   <footer class="site-foot">
-    <div class="wrap foot-grid">
-      <div>
-        <div class="foot-brand">Marginal<em>Note</em></div>
-        <p class="foot-line">Notes in the margins of the machine age.<br>Anonymous, independent, unhurried.</p>
-      </div>
-      <div class="foot-links">
-        <a href="/">Essays</a>
-        <a href="about.html">About</a>
-        <a href="feed.xml">RSS</a>
+    <div class="sheet">
+      <div class="foot-grid">
+        <div>
+          <div class="foot-brand">Marginal<em>Note</em></div>
+          <p class="foot-line">Notes in the margins of the machine age.<br>Anonymous, independent, unhurried.</p>
+        </div>
+        <div class="foot-links">
+          <a href="index.html">Essays</a>
+          <a href="about.html">About</a>
+          <a href="feed.xml">RSS</a>
+        </div>
       </div>
     </div>
   </footer>
 
   <script src="assets/js/site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="assets/js/ink.js"></script>
   <script>
     (function() {
       var n = document.querySelectorAll('.essay-row').length;

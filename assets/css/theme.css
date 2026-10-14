@@ -162,6 +162,13 @@ a:hover { text-decoration-color: var(--ember); }
   padding: clamp(5rem, 13vh, 9rem) 0 clamp(3rem, 7vh, 5rem);
   margin-left: var(--margin-col);
   position: relative;
+  display: grid;
+  grid-template-columns: 1fr minmax(180px, 240px);
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .masthead { grid-template-columns: 1fr; gap: 3rem; }
 }
 .masthead h1 {
   font-family: var(--serif); font-weight: 500;
@@ -178,6 +185,62 @@ a:hover { text-decoration-color: var(--ember); }
 }
 .masthead .lede strong { color: var(--ink); font-weight: 500; font-family: var(--sans); }
 .masthead .lede .mark { color: var(--ember); font-family: var(--sans); font-size: 0.95em; }
+@media (max-width: 900px) { .masthead .lede { max-width: 100%; } }
+
+/* Right-rail marginalia panel — creates the asymmetric editorial space */
+.mast-rail {
+  font-family: var(--mono);
+  font-size: var(--fs-label);
+  letter-spacing: 0.04em;
+  color: var(--faint);
+  line-height: 1.7;
+  padding-top: 0.35rem;
+}
+.mast-rail .rail-block {
+  padding-bottom: 1.6rem;
+  margin-bottom: 1.6rem;
+  border-bottom: 1px solid var(--line);
+}
+.mast-rail .rail-label {
+  text-transform: uppercase;
+  color: var(--ember);
+  letter-spacing: 0.22em;
+  font-size: 0.64rem;
+  margin-bottom: 0.55rem;
+}
+.mast-rail .rail-issue {
+  font-size: 1.9rem;
+  font-family: var(--serif);
+  color: var(--ink);
+  line-height: 1.1;
+}
+.mast-rail .rail-issue em { font-style: italic; color: var(--ember); }
+.mast-rail .rail-small {
+  margin-top: 0.5rem;
+  color: var(--faint);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.mast-rail .rail-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+.mast-rail .rail-quote cite {
+  display: block;
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 0.62rem;
+  color: var(--faint);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-top: 0.6rem;
+}
+@media (max-width: 900px) { .mast-rail { display: none; } }
 
 /* Index header between masthead and list */
 .index-head {

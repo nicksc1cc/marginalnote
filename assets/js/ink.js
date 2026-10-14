@@ -1,8 +1,8 @@
 /* Marginal Note — generative ink margin sketch
-   Concept: behind the page, a hand is always annotating the margins.
-   Faint ink loops, underlines, arrows and stray marks draw themselves
-   continuously, like marginalia written in real time. Must be VISIBLE
-   at rest or the page reads as flat AI-generated paper. */
+   Concept: behind the page, a hand is always annotating the margins
+   with a pen. Strokes must be visible at rest: warm dark-brown ink,
+   targeted at the left margin + right edge where a reader's eye goes,
+   drawn continuously. Some strokes pre-spawned so the page is never bare. */
 
 p5.disableFriendlyErrors = true;
 
@@ -11,42 +11,46 @@ p5.disableFriendlyErrors = true;
 
   const CONFIG = {
     seed: 2091,
-    strokeAlpha: 30,
-    maxStrokes: 90,
-    drawSpeed: 0.0016,
-    addEveryMin: 5,
-    addEveryMax: 22,
-    minLength: 110,
-    maxLength: 520,
-    weightMin: 1.0,
-    weightMax: 2.2,
+    strokeAlpha: 58,          // visible pen ink, not a ghost
+    maxStrokes: 46,
+    drawSpeed: 0.0022,
+    addEveryMin: 12,          // slow steady drip after the initial burst
+    addEveryMax: 40,
+    initialBurst: 12,         // strokes already on page at load
+    minLength: 90,
+    maxLength: 480,
+    weightMin: 1.2,
+    weightMax: 2.6,
+    marginBias: 0.75,         // 75% of strokes live in the margins
   };
 
   let strokes = [];
   let pg;
   let lastAdd = 0;
   let totalDrawn = 0;
+  let burstDone = false;
 
   function makeStroke(w, h, rng) {
-    const nearLeft = rng() < 0.5;
-    const nearRight = !nearLeft && rng() < 0.8;
-    const vertical = rng() < 0.45;
+    // margins: left 18%, right 14%; occasionally wander into the text gutters
+    const inMargin = rng() < CONFIG.marginBias;
+    const nearLeft = inMargin ? (rng() < 0.62) : (rng() < 0.3);
+    const vertical = rng() < 0.5;
 
-    const px = nearLeft
-      ? Math.floor(w * (0.02 + rng() * 0.12))
-      : nearRight
-        ? Math.floor(w * (0.84 + rng() * 0.12))
-        : Math.floor(w * (0.2 + rng() * 0.6));
-    const py = Math.floor(h * (0.04 + rng() * 0.92));
+    let px;
+    if (nearLeft) px = Math.floor(w * (0.055 + rng() * 0.10));   // left margin
+    else if (inMargin) px = Math.floor(w * (0.87 + rng() * 0.09)); // right margin
+    else px = Math.floor(w * (0.18 + rng() * 0.6));               // mid-page, rare
+
+    const py = Math.floor(h * (0.03 + rng() * 0.9) * (nearLeft ? 1 : 1));
 
     const len = CONFIG.minLength + rng() * (CONFIG.maxLength - CONFIG.minLength);
-    const wobble = 2 + rng() * 4.5;
+    const wobble = 2.4 + rng() * 4.5;
 
     const pts = [];
     const steps = 14 + Math.floor(rng() * 16);
     const baseAngle = vertical
-      ? (rng() < 0.5 ? -Math.PI / 2 : Math.PI / 2) + (rng() - 0.5) * 0.7
-      : (rng() < 0.5 ? Math.PI : 0) + (rng() - 0.5) * 0.7;
+      ? (rng() < 0.5 ? -Math.PI / 2 : Math.PI / 2) + (rng() - 0.5) * 0.75
+      : (rng() < 0.5 ? Math.PI : 0) + (rng() - 0.5) * 0.75;
 
     let x = px, y = py;
     for (let i = 0; i <= steps; i++) {
@@ -62,8 +66,8 @@ p5.disableFriendlyErrors = true;
     return {
       pts,
       t: 0,
-      type: rng() < 0.6 ? 'line' : (rng() < 0.5 ? 'underline' : 'arrow'),
-      alpha: CONFIG.strokeAlpha * (0.7 + rng() * 0.6),
+      type: rng() < 0.62 ? 'line' : (rng() < 0.5 ? 'underline' : 'arrow'),
+      alpha: CONFIG.strokeAlpha * (0.65 + rng() * 0.5),
       weight: CONFIG.weightMin + rng() * (CONFIG.weightMax - CONFIG.weightMin),
     };
   }
@@ -75,7 +79,7 @@ p5.disableFriendlyErrors = true;
     ctx.push();
     ctx.strokeWeight(s.weight);
     ctx.strokeCap('round');
-    ctx.stroke(105, 70, 38, s.alpha);
+    ctx.stroke(120, 82, 44, s.alpha);
 
     ctx.beginShape();
     for (let i = 0; i < n; i++) {
@@ -86,8 +90,8 @@ p5.disableFriendlyErrors = true;
     if (s.type === 'arrow' && n >= s.pts.length - 2) {
       const a = s.pts[n - 2], b = s.pts[n - 1];
       const ang = Math.atan2(b[1] - a[1], b[0] - a[0]);
-      const sz = 9;
-      ctx.strokeWeight(1.4);
+      const sz = 11;
+      ctx.strokeWeight(1.6);
       ctx.line(b[0], b[1], b[0] - Math.cos(ang - 0.5) * sz, b[1] - Math.sin(ang - 0.5) * sz);
       ctx.line(b[0], b[1], b[0] - Math.cos(ang + 0.5) * sz, b[1] - Math.sin(ang + 0.5) * sz);
     }
@@ -108,10 +112,20 @@ p5.disableFriendlyErrors = true;
       pg = p.createGraphics(w, h);
       pg.clear();
       p.strokeCap('round');
+
+      // Pre-spawn a burst so the page has ink immediately
+      const rng = () => p.random(1);
+      for (let i = 0; i < CONFIG.initialBurst; i++) {
+        strokes.push(makeStroke(w, h, rng));
+      }
     };
 
     p.draw = function () {
       const w = p.width, h = p.height;
+
+      if (!burstDone && strokes.length) {
+        burstDone = true;
+      }
 
       if (strokes.length < CONFIG.maxStrokes && p.frameCount - lastAdd > CONFIG.addEveryMin + p.random(0, CONFIG.addEveryMax - CONFIG.addEveryMin)) {
         const rng = () => p.random(1);
@@ -128,11 +142,11 @@ p5.disableFriendlyErrors = true;
         totalDrawn++;
       }
 
-      // slow fade so the page never fills completely
-      if (p.frameCount % 180 === 0) {
+      // gentle fade: alpha-erode towards transparent so the page never fills
+      if (p.frameCount % 300 === 0) {
         const g = pg.drawingContext;
         g.globalCompositeOperation = 'destination-out';
-        g.fillStyle = 'rgba(0,0,0,0.02)';
+        g.fillStyle = 'rgba(0,0,0,0.025)';
         g.fillRect(0, 0, w, h);
         g.globalCompositeOperation = 'source-over';
       }
@@ -140,7 +154,6 @@ p5.disableFriendlyErrors = true;
       p.clear();
       p.image(pg, 0, 0);
 
-      // debug hook so an agent can verify rendering
       if (window.__inkStats) {
         window.__inkStats = {
           strokes: strokes.length,

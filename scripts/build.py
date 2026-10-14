@@ -151,7 +151,7 @@ def build_essay(md_path: Path, force_number=None) -> dict:
         .replace("<!-- OG_TITLE -->", title)
         .replace("<!-- OG_DESC -->", description or "A marginal note on artificial intelligence, ethics, and the world as it becomes.")
         .replace("<!-- SHADOW_TITLE -->", title)
-        .replace("<!-- META -->", f"{category} \u00b7 {date_display}")
+        .replace("<!-- BYLINE -->", f"{category} \u00b7 {date_display}")
         .replace("<!-- BODY -->", body_html)
         .replace("<!-- CANONICAL -->", f"https://marginalnote.com/essays/{slug}.html")
     )

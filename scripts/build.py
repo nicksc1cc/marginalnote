@@ -147,22 +147,14 @@ def build_essay(md_path: Path, force_number=None) -> dict:
 
     tpl = essay_template()
     page = (tpl
-        .replace("<!-- TITLE -->", f"Marginal Note · {title}")
+        .replace("<!-- TITLE -->", title)
         .replace("<!-- OG_TITLE -->", title)
         .replace("<!-- OG_DESC -->", description or "A marginal note on artificial intelligence, ethics, and the world as it becomes.")
-        .replace("<!-- NO -->", f"{number:02d}")
-        .replace("<!-- CATEGORY -->", category)
-        .replace("<!-- DATE -->", date_display)
-        .replace("<!-- WORDCOUNT -->", f"{words} words")
-        .replace("<!-- READTIME -->", f"{minutes} min")
         .replace("<!-- SHADOW_TITLE -->", title)
-        .replace("<!-- DEK -->", description)
-        .replace("<!-- SLUG -->", slug)
+        .replace("<!-- META -->", f"{category} \u00b7 {date_display}")
         .replace("<!-- BODY -->", body_html)
         .replace("<!-- CANONICAL -->", f"https://marginalnote.com/essays/{slug}.html")
     )
-    page = page.replace("<!-- NEXT_TITLE -->", "Next essay")
-    page = page.replace("<!-- NEXT_HREF -->", "#")
 
     dest = ESSAYS / f"{slug}.html"
     dest.write_text(page)
@@ -179,14 +171,10 @@ def build_index(essays: list):
     rows = []
     for i, e in enumerate(order):
         rows.append(f'''
-        <a class="essay-row" href="{e['path']}">
-          <h3>{e['title']}</h3>
-          <p class="ex">{e['description']}</p>
-          <div class="meta">
-            <span class="tag">{e['category']}</span>
-            <span>{e['date']}</span>
-            <span>{e['words']} words · {e['minutes']} min</span>
-          </div>
+        <a class="essay-item" href="{e['path']}">
+          <span class="title">{e['title']}</span><br>
+          <span class="excerpt">{e['description']}</span><br>
+          <span class="meta">{e['category']} · {e['date']}</span>
         </a>''')
 
     index_path = ROOT / "index.html"

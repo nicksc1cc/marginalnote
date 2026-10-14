@@ -17,7 +17,7 @@ Essay front matter (YAML-like, top of file between --- lines):
     words: 1200               # optional word count override
     reading_minutes: 6        # optional
     body_markup:
-        dropcap: true         # optional first-paragraph drop cap
+        # dropcap: true  # removed in clean redesign
 """
 import json, re, sys
 from datetime import datetime
@@ -105,8 +105,7 @@ def markdown_to_html(body: str, dropcap=False) -> str:
 
     html = "\n".join(out)
     if dropcap:
-        # Apply dropcap class to the first paragraph
-        html = re.sub(r"<p>", '<p class="dropcap">', html, count=1)
+        pass
     return html
 
 
@@ -138,12 +137,7 @@ def build_essay(md_path: Path, force_number=None) -> dict:
     number = force_number or int(fm["number"]) if "number" in fm else None
     if number is None:
         # find next number from existing essays
-        nums = []
-        for f in ESSAYS.glob("*.html"):
-            m = re.search(r"data-number=\"(\d+)\"", f.read_text())
-            if m:
-                nums.append(int(m.group(1)))
-        number = max(nums) + 1 if nums else 1
+        number = 0
 
     slug = md_path.stem
     date_display = datetime.strptime(date, "%Y-%m-%d").strftime("%d %b %Y") if re.match(r"\d{4}-\d{2}-\d{2}", date) else date
@@ -185,16 +179,13 @@ def build_index(essays: list):
     rows = []
     for i, e in enumerate(order):
         rows.append(f'''
-        <a class="essay-row reveal" href="{e['path']}">
-          <div class="no"><span>Nº {e['number']:02d}</span></div>
-          <div>
-            <h3>{e['title']}</h3>
-            <p class="ex">{e['description']}</p>
-            <div class="meta">
-              <span class="tag">{e['category']}</span>
-              <span>{e['date']}</span>
-              <span>{e['words']} words · {e['minutes']} min</span>
-            </div>
+        <a class="essay-row" href="{e['path']}">
+          <h3>{e['title']}</h3>
+          <p class="ex">{e['description']}</p>
+          <div class="meta">
+            <span class="tag">{e['category']}</span>
+            <span>{e['date']}</span>
+            <span>{e['words']} words · {e['minutes']} min</span>
           </div>
         </a>''')
 

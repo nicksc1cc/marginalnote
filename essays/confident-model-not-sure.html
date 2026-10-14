@@ -22,10 +22,9 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="progress" aria-hidden="true"></div>
-  <div id="ink-canvas" aria-hidden="true"></div>
 
   <header class="site-head">
-    <div class="sheet">
+    <div class="wrap">
       <div class="nav">
         <a class="brand" href="../index.html">Marginal<em>Note</em></a>
         <nav class="nav-links" aria-label="Primary">
@@ -38,24 +37,22 @@
   </header>
 
   <main id="main">
-    <div class="sheet">
+    <div class="wrap">
       <article class="article">
-        <header class="article-head">
-          <p class="article-kicker">
-            <span class="count">Nº 01</span>
-            <span>AI</span>
-          </p>
-          <h1>Why a Confident Model Isn't a Sure One</h1>
-          <p class="dek">The most dangerous thing a language model outputs is not a wrong answer. It is a wrong answer delivered with complete certainty.</p>
-          <div class="byline">
-            <span>Marginal Note</span>
-            <span>14 Oct 2026</span>
-            <span>4 min</span>
-            <span>980 words</span>
-          </div>
-        </header>
+        <p class="article-kicker">
+          <span class="count">Nº 01</span>
+          <span>AI</span>
+        </p>
+        <h1>Why a Confident Model Isn't a Sure One</h1>
+        <p class="dek">The most dangerous thing a language model outputs is not a wrong answer. It is a wrong answer delivered with complete certainty.</p>
+        <div class="byline">
+          <span>Marginal Note</span>
+          <span>14 Oct 2026</span>
+          <span>4 min</span>
+          <span>980 words</span>
+        </div>
         <div class="article-body">
-          <p class="dropcap"><strong>The most dangerous thing a large language model outputs is not a wrong answer. It is a wrong answer delivered with complete certainty.</strong></p>
+          <p><strong>The most dangerous thing a large language model outputs is not a wrong answer. It is a wrong answer delivered with complete certainty.</strong></p>
 
 <p>Ask a model a question and it will often begin its reply with "I'm" — as in "I understand," "I think," "I believe." It will never begin with "I have no idea." Not because it is concealing ignorance, but because it does not have any. A language model is a probability distribution over tokens, not a mind with a degree of belief about the state of the world. Confidence, for a model, is a property of the text it has learned to produce — not a calibrated report on how likely the answer is to be true.</p>
 
@@ -93,7 +90,7 @@
 
 <p>The model will not be insulted by being checked. It will not remember. It will not even notice. That is precisely the problem, and also the solution: we are still the ones who have to.</p>
         </div>
-        <p class="endsig" style="max-width:var(--measure);">End of note</p>
+        <p class="endsig">End of note</p>
       </article>
 
       <nav class="readnext" aria-label="Next essay">
@@ -102,13 +99,13 @@
           <h3>Next essay</h3>
           <span class="arrow" aria-hidden="true">→</span>
         </a>
-        <p><a href="../index.html" style="font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:inline-block;margin-top:1rem;">← All essays</a></p>
+        <p style="margin-top:1rem;"><a href="../index.html" class="all-link">← All essays</a></p>
       </nav>
     </div>
   </main>
 
   <footer class="site-foot">
-    <div class="sheet">
+    <div class="wrap">
       <div class="foot-grid">
         <div>
           <div class="foot-brand">Marginal<em>Note</em></div>
@@ -124,7 +121,5 @@
   </footer>
 
   <script src="../assets/js/site.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
-  <script src="../assets/js/ink.js"></script>
 </body>
 </html>

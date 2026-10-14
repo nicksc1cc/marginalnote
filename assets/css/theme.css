@@ -111,13 +111,9 @@ a:hover { text-decoration-color: var(--ember); }
   left: calc(var(--pad) + var(--margin-col) - 1.4rem);
   top: 0; bottom: 0;
   width: 1.5px;
-  background: linear-gradient(to bottom,
-    var(--ember) 0%, var(--ember) 5%,
-    var(--line-strong) 5%);
-  background-size: 1.5px 100vh;
-  background-repeat: no-repeat;
+  background: var(--ink-soft);
+  opacity: 0.35;
   z-index: 0;
-  opacity: 0.9;
 }
 
 /* Section folio label (page-number style) */
